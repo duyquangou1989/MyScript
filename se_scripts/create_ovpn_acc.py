@@ -1,7 +1,6 @@
 #!/usr/bin/python
+#quang.tong
 import os, subprocess
-import json
-import commands
 
 sacli_excute = "/usr/local/openvpn_as/scripts/sacli"
 
@@ -45,7 +44,6 @@ def create_ovpn_account(account,ovpn_ip):
 def main():
 	account_data_file = data_to_dict('/usr/local/openvpn_as/se_scripts/account.txt')
 	list_ovpn = list_ovpn_ip()
-	#print list_ovpn
 	for user,ip in account_data_file.items():
 		if check_account_exist(user):
 			print 'This User ' + user + " exist on db, Plz recheck "
