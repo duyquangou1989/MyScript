@@ -1,0 +1,16 @@
+$TTL	86400
+
+@	IN	SOA	ns.domain.local. xhaihuynh.yahoo.com. (
+			1312106811	; Serial
+			10800	; Refresh
+			3600	; Retry
+			604800	; Expire
+			86400 )	; Minimum
+
+domain.local.		 IN NS	 ns.domain.local.
+domain.local.		 IN A	 192.168.1.181
+dc.domain.local. 	 IN A    192.168.1.181
+_ldap._tcp.domain.local. SRV 0 0 389 dc.domain.local.
+_kerberos._tcp.domain.local. SRV 0 0 88 dc.domain.local.
+_ldap._tcp.dc._msdcs.domain.local. SRV 0 0 389 dc.domain.local.
+_kerberos._tcp.dc._msdcs.domain.local. SRV 0 0 88 dc.domain.local.
