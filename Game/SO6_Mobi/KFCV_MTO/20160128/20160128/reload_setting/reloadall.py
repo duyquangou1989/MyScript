@@ -1,0 +1,2 @@
+import MMain
+MMain.reloadAllActivityConfig()

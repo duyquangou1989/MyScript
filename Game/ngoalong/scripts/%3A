@@ -1,0 +1,9 @@
+today=`date +"%Y-%m-%d"`
+dir=/home/ngoalong/www/data/temp/marketting/$today
+cd $dir
+file=THINHLONG.csv
+com="mkdir test";	
+	#for file in `ls`;do
+	#	awk '{print $1}' $file
+	#done
+	awk -F '|' '{print $4 }' $file >> $4.txt

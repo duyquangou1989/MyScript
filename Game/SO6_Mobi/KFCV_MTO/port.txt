@@ -1,0 +1,19 @@
+;nohup ./PayServerd > nohup.out_ps 2>&1 &
+nohup ./GMServerd > nohup.out_gm 2>&1 &
+nohup ./AuthServerd> nohup.out_ps 2>&1 &
+nohup ./BattleManagerd> nohup.out_bm 2>&1 &
+nohup ./BattleServerd> nohup.out_bs 2>&1 &
+nohup ./GameServerd> nohup.out_gs 2>&1 &
+
+:80 > nginx > client get serverlist
+:8080 > nginx > No platform Register
+:8081 > GMServerd > GM Tools
+:8080 > PayServerd > Payment callback port
+:8180 > BattleServerd > Game Client Use
+:8899 > GameServerd > Game Client Use
+:18899 > GameServerd > Debug Client Use (Limit 
+
+gmdb  ---> gms.config[GMServerd's config]
+pay --->ps.config [PayServerd's config]
+web ---> main.json[/opt/Applications/Common/WebSite/configs/main.json]
+comm ---> gs.config[GameServerd's config]

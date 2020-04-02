@@ -1,0 +1,7 @@
+###NIKCN
+nikcnpg2
+^)X=8K4TVGig%R2
+
+curl -v -XPOST 'http://api.vcdn.vn/ird-restful-services/cdn/purge-cache' -u 'nikcnpg2_api:B8PKccpLay8V7dg' -d 'productDomain=static-nikkicn.mto.zing.vn&paths=/my.cnf'  -H 'accept: application/json'
+
+###NIKSEA

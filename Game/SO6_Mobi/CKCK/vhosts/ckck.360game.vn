@@ -1,0 +1,50 @@
+server {
+    listen 10.10.91.4:85;
+    server_name dck.360game.vn id.dck.360game.vn;
+    include /usr/local/nginx/conf/mime.types;
+    #access_log /var/log/nginx/id.ckck.360game.vn_access_log combined;
+    error_log /var/log/nginx/id.dck.360game.vn_error_log warn;
+
+    root /data/webdata/360game;
+    index ckck.php;
+
+    location / {
+                try_files $uri $uri/ @modx-rewrite;
+		
+    }
+        location @modx-rewrite {
+                # Can put some of your own rewrite rules in here
+                # for example rewrite ^/~(.*)/(.*)/? /users/$1/$2 last;
+                # If nothing matches we'll just send it to /index.php
+
+                rewrite ^/login-game$ /?m=home last;
+                rewrite ^/server-game$ /?m=listserver last;
+                rewrite ^/server-game-launcher$ /?m=listserverlauncher last;
+                rewrite ^/play-game$ /?m=play last;
+                rewrite ^/play-game-launcher$ /?m=playlauncher last;
+                rewrite ^/play-test$ /?m=playtest last;
+		rewrite ^/quick-play$ /?m=quickplay last;
+                rewrite ^/logout-game$ /?m=logout last;
+                rewrite ^/not-found$ /?m=notfound last;
+        }
+        location ~ .php$ {
+                fastcgi_pass 127.0.0.1:9000;
+                fastcgi_index index.php;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                fastcgi_param PATH_INFO $fastcgi_script_name;
+                include /usr/local/nginx/conf/fastcgi_params;
+        }
+        location ~ \.css {
+                add_header Content-Type         text/css;
+        }
+    location ~ \.js {
+                add_header Content-Type         application/x-javascript;
+        }
+    location ~ /\.ht {
+        deny all;
+        }
+        location ~* \.(jpg|jpeg|gif|css|png|js|ico|xml|svg|swf)$ {
+                        access_log        off;
+                        expires           30d;
+        }
+}

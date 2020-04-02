@@ -1,0 +1,122 @@
+./restart.sh -w 
+
+Veloting 1/20/2017 4:02:07 PM
+./stop.sh -s
+
+Veloting 1/20/2017 4:02:14 PM
+to stop all machine
+
+Veloting 1/20/2017 4:02:22 PM
+./publish_X.sh file md5
+
+Veloting 1/20/2017 4:02:34 PM
+then ./restart -s
+
+Veloting 1/20/2017 4:02:38 PM
+if test ok
+
+Veloting 1/20/2017 4:02:41 PM
+then ./restart -c
+
+//////////
+restart -w -> to whitelist mode ( phải reload_res.sh)
+stop -s -> stop all server
+publish_X.sh file md5 -> update binary and csv
+restart -s -> start server
+restart -c -> recover into normal mode
+
+
+////Clear live env
+1.stop all server
+2.run qjnn_clean.sql (change database name when run difference Product)
+3.flushall redis (just login in redis and exec flushall)
+4.drop old tlogdb and renew one
+
+///Modify gamesvr.conf
+phải chay reload.sh để reload gameserver khi có config mới
+// when modify game service config
+edit trong server test va run init.sh -> reload.sh
+
+//Config Note
+gamesvr.cnf : loginaddr resaddr snsaddr
+loginsvr.cnf : 
+portal.cnf : SnS
+resource.cnf : 
+snsserver.cnf : gsaddr
+
+##Automation
+STopgame : login, resource chưa stop finish
+
+###
+Bn179kDbr#
+103...67 9590
+58.251.60.32 80
+
+
+#### Create User Select payment log Slave
+CREATE USER 'nikkilog'@'10.17.11.221' IDENTIFIED BY '3jWXdW35De01';
+CREATE USER 'nikkilog'@'10.17.11.241' IDENTIFIED BY '3jWXdW35De01';
+GRANT SELECT ON nuan_v3_game.* TO 'nikkilog'@'10.17.11.221';
+GRANT SELECT ON nuan_cn_game.* TO 'nikkilog'@'10.17.11.241';
+GRANT SELECT ON nuan_v3_login.* TO 'nikkilog'@'10.17.11.221';
+GRANT SELECT ON nuan_cn_login.* TO 'nikkilog'@'10.17.11.241';
+
+===MYSQL TUNING TIPS
+http://techinfobest.com/optimize-mysql-innodb_buffer_pool_size/
+##Cal tmp disk table mysql
+show global variables like 'tmp_table_size';
+show global status like 'created_tmp_disk_tables';
+show global status like 'created_tmp_tables';
+Tmp_disk_tables=((created_tmp_disk_tables*100/(created_tmp_tables+created_tmp_disk_tables))  if > 25 % -> tuning tmp_table_size max_heap_table_size
+##Find current value of open_tables and opened_tables
+show global status  like 'open%';
+Table cache hit rate = table_open_cache*100/Opened_tables
+ 
+
+3664 * 100 / 3664 + 7792 11456
+
+SIGHUP (-1): Đây là một tín hiệu treo, nó chỉ thị cho chương trình re-load file cấu hình hoặc re-open giao diện, chứ không chấm dứt process 
+SIGTERM (-15): đây là một tín hiệu chấm dứt "tao nhã". Nó chỉ thị cho chương trình dừng những gì đang chạy lại, hỏi xem có processes (hoặc users) nào đang kiểm soát nó không, sau đó mới thoát. 
+SIGKILL (-9): tín hiệu bắt buộc chấm dứt luôn một process. 
+
+####Screen & Tmux
+===============Screen url: https://www.tecmint.com/screen-command-examples-to-manage-linux-terminals/
+screen -S <screenname>
+screen -r : restore screen
+screen -ls : list screen
+screen -r 7849 : If you want to restore screen 7849.pts-0.mint, then type this command.
+########Switching between screens
+When you do nested screen, you can switch between screen using command “Ctrl-A” and “n“. It will be move to the next screen. When you need to go to the previous screen, just press “Ctrl-A” and “p“.
+To create a new screen window, just press “Ctrl-A” and “c“.
+########Leaving Screen
+There are 2 (two) ways to leaving the screen. First, we are using “Ctrl-A” and “d” to detach the screen. Second, we can use the exit command to terminating screen. You also can use “Ctrl-A” and “K” to kill the screen.
+==============Tmux url: https://www.sitepoint.com/tmux-a-simple-start/ , cheetsheet :https://tmuxcheatsheet.com/
+tmux : create new ter
+CTRL+B % : Split the current window into two panes by typing:
+CTRL+B " : Now, we want to split the right-hand pane into 2 panes that are stacked vertically. Your cursor should be in the right-side pane
+CTRL+B <UP ARROW> : Before you can do that, though, you need to know how to switch panes, don’t you? To move from the bottom, right-side pane to the top, right-side pane:
+CTRL+B  z : OK, the edit pane is done. Pro tip: If you are using tmux 1.8, you can toggle the curent pane into full-screen by typing:
+CTRL+B c : Quickly now, I’ll show you how to add a window so you can fire up other services related to your app in the tmux session. To add a new window:
+CTRL+B <window number> : When you want to switch between windows 0 and 1 Type windownumber 0 or 1
+CTRL+B d : detached
+tmux attach -t 0 : reattach where -t stands for “target” and 0 is the session name. Now, go ahead and detach again.
+tmux kill-session -t 0 : To end/kill the session 0 // tmux kill-session [-t session_name]
+Ctrl-b then [ : you can use your normal navigation keys to scroll around (eg. Up Arrow or PgDn). Press q to quit scroll mode.
+****In vi mode (see below), you can also scroll the page up/down line by line using Shift-k and Shift-j (if you're already in scroll mode). Unshifted, the cursor moves instead of the page.
+tmux new-session -d -s myServiceName 'myServiceExecutable'
+
+qjnn_2017-10-31.tar.gz 27dc9de45c4bdd1deb5c3a9b944ee273
+#####memcache
+There is no perfect amount of memory -- every website has different requirements. You can base your original tunings on your table sizes, but even this is really only a guesstimate. What's more important is that you monitor it after your initial setting and adjust as necessary. You can do so with the following basic rules:
+1) If your evictions are increasing rapidly and your hit rate is lower than 90% or dropping, you should allocate more memory for your bin.
+2) If your evictions are at 0 but your hit rate is still low, you should review your cache logic -- you're either flushing your cache too frequently, or you're caching data that isn't re-used enough to justify being cached.
+3) If your evictions are 0 and your hit rate is higher than 90% and your bytes are significantly lower than the total RAM you allocated to this bin, you allocated more RAM than you needed to and can reduce the allocation.
+4) Never allocate more memory than your server has! If your server starts swapping, performance will suffer greatly.
+
+An optimal configuration will have your evictions at 0, your hit rate >90%, and enough allocated RAM to meet short term growth.
+
+Answering your other question, mem_used is a broken stat, it tells you nothing.
+
+
+###
+NTP Service - 10.10.128.252      Repo Service - 10.10.128.252

@@ -1,0 +1,20 @@
+KFCVMP1 - Zabbix Monitor
+#172.16.50.2 
+redis-server
+nginx
+8280 - 8285
+8787
+PayServerd
+GMServerd
+mysqld
+
+#172.16.50.3
+uwsgi 
+
+#172.16.50.101
+8899 //GameServerd
+8181 //AuthServerd
+8180 //BattleServerd
+8093 //BattleManagerd
+mysqld
+

@@ -1,0 +1,24 @@
+Note_PVM
+http://103.245.249.2:2231/zabbix
+http://103.245.249.76/vn_mbi 
+
+172.16.45.203;3306;fengyundb_21000
+172.16.45.203;3307;fengyundb_21001
+172.16.45.203;3307;fengyundb_21002
+172.16.45.208;3306;fengyundb_21003
+172.16.45.208;3307;fengyundb_21004
+172.16.45.208;3308;fengyundb_21005
+172.16.45.208;3309;fengyundb_21006
+172.16.45.208;3306;fengyundb_21007
+172.16.45.208;3307;fengyundb_21008
+172.16.45.208;3308;fengyundb_21009
+172.16.45.208;3309;fengyundb_21010
+172.16.45.203;3306;fengyundb_21011
+
+2.1.0
+LAN MAC Address	C8:3A:35:0F:67:F0
+WAN MAC Address	C8:3A:35:0F:67:F5
+
+103.245.249.76/vn_mbi/login
+
+./configure --prefix=/usr/local/nginx --with-poll_module --with-select_module --with-http_ssl_module --with-http_realip_module --with-http_addition_module --with-http_xslt_module --with-http_image_filter_module --with-http_sub_module --with-http_dav_module --with-http_flv_module --with-http_gzip_static_module --with-http_random_index_module --with-http_secure_link_module --with-http_stub_status_module --with-pcre --with-md5-asm --with-sha1-asm && make && make install 

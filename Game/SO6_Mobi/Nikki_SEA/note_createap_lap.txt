@@ -1,0 +1,5 @@
+NETSH WLAN set hostednetwork mode=allow ssid=reviewios key=111222333@@@
+netsh wlan start hostednetwork
+netsh wlan stop hostednetwork
+
+http://www.windowscentral.com/how-turn-your-windows-10-pc-wireless-hotspot

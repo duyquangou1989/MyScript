@@ -1,0 +1,20 @@
+
+
+**** Reset ngày mở server về hiện tại.
+- Login server local : 10.10.113.3 ( sudo su )
+====local 1 ( s999 ) ====
+- cd /data/xyzl/server/test999  (s999)
+- vim config.properties  "open_date=2017-11-18 00:00:01" ==> sửa thành ngày hiện tại.
+- sh service restart
+
+====local 2 ( s1000 ) ====
+- cd /data/xyzl/server/test1000  (s1000)
+- vim config.properties  "open_date=2017-11-18 00:00:01" ==> sửa thành ngày hiện tại.
+- sh service restart
+
+
+**** Tool mở server: 
+- url: http://tool.taydu.360game.vn:8899
+- user: quangtd2
+- pass: quangtd2@123
+

@@ -1,0 +1,94 @@
+server_key=( 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41)
+server_ip[1]=10.30.27.4
+server_ip[2]=10.30.27.6
+server_ip[3]=10.30.27.7
+server_ip[4]=10.30.27.9
+server_ip[5]=10.30.27.8
+server_ip[6]=10.30.27.10
+server_ip[7]=10.30.27.11
+server_ip[8]=10.30.27.12
+server_ip[9]=10.30.27.13
+server_ip[10]=10.30.27.14
+server_ip[11]=10.30.27.15
+server_ip[12]=10.30.27.16
+server_ip[13]=10.30.27.17
+server_ip[14]=10.30.27.18
+server_ip[15]=10.30.27.19
+server_ip[16]=10.30.27.20
+server_ip[17]=10.30.27.21
+server_ip[18]=10.30.27.22
+server_ip[19]=10.30.27.23
+server_ip[20]=10.30.27.24
+server_ip[21]=10.30.27.25
+server_ip[22]=10.30.27.26
+server_ip[23]=10.30.27.27
+server_ip[24]=10.30.27.28
+server_ip[25]=10.30.27.29
+server_ip[26]=10.30.27.30
+server_ip[27]=10.30.27.31
+server_ip[28]=10.30.27.32
+server_ip[29]=10.30.27.33
+server_ip[30]=10.30.27.34
+server_ip[31]=10.30.27.35
+server_ip[32]=10.30.27.36
+server_ip[33]=10.30.27.37
+server_ip[34]=10.30.27.38
+server_ip[35]=10.30.27.39
+server_ip[36]=10.30.27.40
+server_ip[37]=10.30.27.41
+server_ip[38]=10.30.27.42
+server_ip[39]=10.30.27.43
+server_ip[40]=10.30.27.44
+server_ip[41]=10.30.27.2
+server_name[1]=KIMLONG
+server_name[2]=HOALONG
+server_name[3]=THOLONG
+server_name[4]=MOCLONG
+server_name[5]=THUYLONG
+server_name[6]=THANHLONG
+server_name[7]=CHULONG
+server_name[8]=BACHLONG
+server_name[9]=VULONG
+server_name[10]=THIENLONG
+server_name[11]=TRUONGLONG
+server_name[12]=LUCLONG
+server_name[13]=HUNGLONG
+server_name[14]=KIEMLONG
+server_name[15]=NHATLONG
+server_name[16]=CUONGLONG
+server_name[17]=TANGLONG
+server_name[18]=TRUCLONG
+server_name[19]=PHUCLONG
+server_name[20]=NGANLONG
+server_name[21]=MINHLONG
+server_name[22]=XICHLONG
+server_name[23]=LOILONG
+server_name[24]=NGOCLONG
+server_name[25]=TRUYLONG
+server_name[26]=THIETLONG
+server_name[27]=HANGLONG
+server_name[28]=BALONG
+server_name[29]=PHILONG
+server_name[30]=MANHLONG
+server_name[31]=DAILONG
+server_name[32]=VANLONG
+server_name[33]=NGUYETLONG
+server_name[34]=HACLONG
+server_name[35]=SONLONG
+server_name[36]=VUONGLONG
+server_name[37]=NGAOLONG
+server_name[38]=THACHLONG
+server_name[39]=PHUNGLONG
+server_name[40]=THINHLONG
+server_name[41]=TEST_LOCAL
+today=`date +"%Y-%m-%d"`
+
+	for key in ${server_key[@]}
+	do
+		if [ $key -eq 41 ]
+		then
+		mkdir -p /bkfarm/log/marketting-bk/$today
+		curl -v  "http://${server_ip[$key]}:9103/player/state/query" > /bkfarm/log/marketting-bk/$today/${server_name[$key]}.csv
+		fi
+	done
+	

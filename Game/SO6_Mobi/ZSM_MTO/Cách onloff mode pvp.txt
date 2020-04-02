@@ -1,0 +1,32 @@
+1. time on/off pvp
+ssgame\common\config PVPCfg.xml
+
+<PVPCfg Version="55" DisableBeginTime="25200" DisableEndTime="79200" ResetTime="21600" PVPNumPerDay="10" PVPNumRefreshNum="1" GradeNum="12" PVPShopNum="1" InitPVPScore="100" ShopUpdateNum="3" ScoreFactor="1500" MaxGradeScore="18960" PVPNumPerRefresh="5" PVPTypeFlag="7">
+
+Đơn vị là giây 
+
+
+bước 1：chỉnh sửa file config trong 4 server sau 
+10.40.95.101
+10.40.95.102
+10.40.95.103
+10.40.95.104 
+
+Sửa /data/home/user00/ssgame/common/config  PVPCfg.xml
+
+1. 
+Từ 0h đến 20h off mode pvp
+DisableBeginTime="0"  bắt đầu off 
+DisableEndTime="72000"   kết thúc off
+
+2. 
+Từ 21h đến 23h off mode pvp
+DisableBeginTime="75600"  bắt đầu off
+DisableEndTime="82800"   kết thúc off
+
+bước 2: restart service tcm 
+10.40.95.2
+/data/home/user00/apps/tcm/bin 
+./start_tcmconsole.sh 
+stop 1.11.11.* 
+start 1.11.11.*

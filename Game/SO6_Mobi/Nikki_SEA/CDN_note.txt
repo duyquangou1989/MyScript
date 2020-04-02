@@ -1,0 +1,64 @@
+###NIKKISEA
+==API
+api_user: nikkien_api
+pass : HD2G3caTZwNTa1nNtHYK nFZ%Ge{5hU.8a?V
+==RSYNC & FTP
+user: nikkisea
+pass: "'5e36c~%TPi7d}
+
+##NIKKICHINA
+==API
+api_user: nikcnpg2_api
+pass : B8PKccpLay8V7dg
+==RSYNC & FTP
+user: nikcnpg2
+pass: ^)X=8K4TVGig%R2
+
+##NIKKITHAI
+Rsync 10.30.91.19 port: 873
+Module rsync : niktpg2
+User: niktpg2
+Pass: >R/5*hVC;5h(g\b
+
+User API: niktpg2_api
+Pass API: eaf8VoiEB4pTuh5
+#########################
+
+
+##API CURL
+curl -v -XPOST 'http://api.vcdn.vn/ird-restful-services/cdn/purge-cache' -u 'nikcnpg2_api:B8PKccpLay8V7dg' -d 'productDomain=static-nikkicn.mto.zing.vn&paths=/my.cnf'  -H 'accept: application/json'
+
+curl -XPOST 'http://api.vcdn.vn/ird-restful-services/cdn/purge-cache' -u 'nikcnpg2_api:B8PKccpLay8V7dg' -d 'productDomain=static-nikkicn.mto.zing.vn&paths=/live&type=dir'  -H 'accept: application/json'
+##########
+
+curl -XPOST 'http://api.vcdn.vn/ird-restful-services/cdn/purge-cache' -u 'nikkien_api:nFZ%Ge{5hU.8a?V' -d 'productDomain=static-nikkien.mto.zing.vn&paths=/test&type=dir'  -H 'accept: application/json'
+
+curl -v -XPOST 'http://api.vcdn.vn/ird-restful-services/cdn/purge-cache' -u 'nikkien_api:HD2G3caTZwNTa1nNtHYK' -d 'productDomain=static-nikkien.mto.zing.vn&paths=/file1.txt'  -H 'accept: application/json'
+##############
+
+curl -XPOST 'http://api.vcdn.vn/ird-restful-services/cdn/purge-cache' -u 'niktpg2_api:P-+kKSrz4g)j5&TW' -d 'productDomain=static-nikkithai.mto.zing.vn&paths=/live&type=dir'  -H 'accept: application/json'
+
+curl -v -XPOST 'http://api.vcdn.vn/ird-restful-services/cdn/purge-cache' -u 'niktpg2_api:eaf8VoiEB4pTuh5' -d 'productDomain=static-nikkithai.mto.zing.vn&paths=/test.txt'  -H 'accept: application/json'
+
+#####################
+openssl req -new -newkey rsa:2048 -nodes -keyout image-omgthai.g6.zing.vn.key -out image-omgthai.g6.zing.vn.csr
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'nikkitlog@@@';
+ALTER USER 'root'@'127.0.0.1' IDENTIFIED BY 'nikkitlog@@@';
+
+SET PASSWORD FOR 'root'@'localhost' = PASSWORD(nikkitlog@@@);
+SET PASSWORD FOR 'root'@'127.0.0.1' = PASSWORD(nikkitlog@@@);
+
+ls * | xargs sed -i 's/logintenikkien.mto.zing.vn:8081\/download/static-nikkien.mto.zing.vn\/test/g'
+
+##OMG Thai
+IP rsync: 61.28.231.65 Port 873
+Module rsync: omg_image
+
+User rsync:  omg_image
+Pass rsync:  4JYmVQ@W!)BT6!DJ
+user_api:   omg_image
+password:  PrMDv\Jnuv2Y3F{V
+rsync -avz -r testa.txt --password-file=sec.txt rsync://omg_image@61.28.231.65/omg_image 
+
+curl -XPOST 'http://api.vcdn.vn/ird-restful-services/cdn/purges/purge-cache' -u 'omg_image:PrMDv\Jnuv2Y3F{V' -d 'productDomain=image-omgthai.g6.zing.vn&paths=&type=all'  -H 'accept: application/json'

@@ -1,0 +1,39 @@
+﻿1. on/off cdk (gift code) 
+
+gamesvr\config\common CDKey.xml
+
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--Server configuration. Please Be Very Carefull When Modify it!-->
+<CDKey IsOpen="true">
+	<SpecialCDKey Key="ToiYeuZSM" BatchNum="1" AwardID="2" BeginDateTime="2015-12-02 00:00:00" EndDateTime="2016-2-29 23:59:00"/>
+	<InvitationCodeCfg IsOpen = "true" AwardID="1" BeginDateTime="2014-8-20 00:00:00" EndDateTime="2015-12-31 23:59:00"/>
+	<CDKeyAward ID="1">
+		<Trophy Value="100" />
+		<Gold Value="5000" />
+	</CDKeyAward>
+	<CDKeyAward ID="2">
+		<Trophy Value="200" />
+		<Gold Value="10000" />
+		<Item ItemID="10000116" Value="5" />
+	</CDKeyAward>
+	<CDKeyAward ID="3">
+		<Trophy Value="300" />
+		<Gold Value="15000" />
+	</CDKeyAward>	
+</CDKey>
+
+
+（1）tổng 
+ <CDKey IsOpen="true">   mở
+ <CDKey IsOpen="false">  đóng
+
+（2）on/off code invite 
+ InvitationCodeCfg IsOpen = "true"  mở
+ InvitationCodeCfg IsOpen = "false"  đóng 
+
+（3）config thời gian bắt đầu và kết thúc
+ BeginDateTime="2015-12-02 00:00:00" EndDateTime="2016-2-29 23:59:00
+ 
+（4）Key="ToiYeuZSM"，đổi key, sửa trực tiếp ở đây 
+
+（5）config xong restart gamesvr

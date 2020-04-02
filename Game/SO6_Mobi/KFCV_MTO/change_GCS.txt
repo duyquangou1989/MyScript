@@ -1,0 +1,9 @@
+WebCenter： setup trước Nginx, trực tiếp đóng gói qua bên kia là dc
+GMServer、PayServer：
+1、Stop all server, bao gồm tất cả server game và common
+2、Dùng lệnh mysqldump xuất ra database cần move.
+3、Trên sv mới tiến hành input database
+4、Update file setup GMServer, PayServerd 
+5、Update gs.config.
+
+http://103.245.249.98/sls/count_pay

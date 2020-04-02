@@ -1,0 +1,5 @@
+玩家注册 PlayerRegister	注册时间 RecordTime	服务器ID ServerID	账号 Account	角色名 RoleName	平台 Platform					
+玩家登录 PlayerLogin	登录时间 RecordTime	服务器ID ServerID	账号 Account	角色名 RoleName	等级 Level	平台 Platform	余额 CurGoldMoney			
+玩家登出 PlayerLogin	登出时间 RecordTime	服务器ID ServerID	账号 Account	角色名 RoleName	等级 Level	平台 Platform	余额 CurGoldMoney			
+获得元宝 GetGoldMoeny	获得时间 RecordTime	服务器ID ServerID	账号 Account	角色名 RoleName	等级 Level	获得数量 Amount	余额 CurGoldMoney	txnid	items	
+消耗元宝 UseGoldMoney	获得时间 RecordTime	服务器ID ServerID	账号 Account	角色名 RoleName	途径 UseWay	物品ID ItemID	数量 Amount	使用量 UsedAmount	余额 CurGoldMoney	等级 Level

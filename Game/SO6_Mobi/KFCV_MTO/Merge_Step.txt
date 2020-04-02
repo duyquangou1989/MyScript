@@ -1,0 +1,95 @@
+## Base Env
+
+- rsyncd (didn't need it if do not use shell script to backup)
+- MySQL-python
+- python 2.6 +
+
+1. install and config rsyncd server
+2. install MySQL-python: `yum install MySQL-python -y`
+
+
+## Ready
+
+1. Config `backup_game_rsync.sh` (didn't need it if do not use shell script to backup)
+2. Config DBMergeTool in `startmerge.py`
+
+        GMConfig = "/home/cmge/Common/gms.json" # get database info of megre serveres
+        SQLFile = "/home/cmge/Common/SQL" # use it to Create Temp database.
+        __Common   # Temp Mysql connect info
+
+## Setup
+
+Megre server 2 and 3 and 4 to server 1
+
+1. Import Guild Data all of megre serveres,command example:
+
+		./PyDebugger 127.0.0.1 18899 guild.py > svrid.txt
+
+2. stop `GameServerd`
+3. backup Data, use `backup_game_rsync.sh` or like this commands:
+
+        cd /home/cmge/shaolin1
+        tar zcf ${serverid}_All_20160614.tgz /home/cmge/shaolin1
+        tar zcf ${serverid}_data_20160614.tgz data/ pyscripts/ settings/ GameServerd gs.config tlog.xml
+
+4. Clear Guild Data
+
+        cd /home/cmge/shaolin1/data/python_settings/${serverid}
+        rm -rf R3VpbGRCYXR0bGVEYXRh R3VpbGRCYXR0bGVQbGF5ZXJEYXRh R3VpbGRCYXR0bGVDaXR5RGF0YQ==
+
+5. start Megred
+
+        chmod +x startmerge.py
+        ./startmerge.py 1 2 3 4
+
+6. If success, update DB-data name and the new DB-data name is original+'_'+Megred-date:
+
+        Original DB-data name : Game_data_1
+        Megred data: 20160615
+        New DB-data name: Game_data_1_20160615
+7. Update `gs.conf` 
+
+8.  Update `gms.json` and use command to reload GMServerd, Command:
+
+        kill -38 ${GMServerd's PID}
+
+9.  Update serverlist like this(server 2 3 megred to 1):
+
+        Origin:
+            3	Mộc Vương	103.245.249.109	8899	http://103.245.249.98:38089/	1	1	http://103.245.249.98:38089/static/product/wl/	1	3	3
+            2	Thủy Vương	103.245.249.108	8899	http://103.245.249.98:38089/	1	1	http://103.245.249.98:38089/static/product/wl/	1	2	2
+            1	Kim Vương	103.245.249.107	8899	http://103.245.249.98:38089/	1	1	http://103.245.249.98:38089/static/product/wl/	1	1	1
+        New:
+            1	Mộc Vương	103.245.249.107	8899	http://103.245.249.98:38089/	1	1	http://103.245.249.98:38089/static/product/wl/	1	3	3
+            1	Thủy Vương	103.245.249.107	8899	http://103.245.249.98:38089/	1	1	http://103.245.249.98:38089/static/product/wl/	1	2	2
+            1	Kim Vương	103.245.249.107	8899	http://103.245.249.98:38089/	1	1	http://103.245.249.98:38089/static/product/wl/	1	1	1
+
+10.  Make sure megred success and start server 1.
+11.  Start Keep-server 
+12.  Clean data of Keep-Server
+
+	./PyDebugger 127.0.0.1 18899 mergeclearall.py
+
+11. Done.
+
+PS: ${serverid} = Real ServerID
+
+## Megred Tool To do
+
+1. Get DB info of megred servers from gms.json
+2. Get Temp-Mysql info from startmerge.py
+3. Create Temp database in Temp-Mysql
+3. Dump DB of megred servers
+4. Import DB to Temp-DB
+5. Megred data in Temp-DB
+6. If Megred successed, Import New DB to Mysql of Keep Server's
+
+
+## Errors
+
+1. (1062, "Duplicate entry 'ba47aa77ffa54defab05c896708e9020' for key 'PRIMARY'")
+
+    That mean's have two Players of the same UUID and PlayerName in the two database.
+    Find players' info and delete one of them. then, run merge tool again.
+
+        select UUID,Name,Level,VipLevel from Player where UUID = "ba47aa77ffa54defab05c896708e9020";

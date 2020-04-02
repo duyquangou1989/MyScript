@@ -1,0 +1,64 @@
+#Ansible
+  - name: Check tuning kernel
+    shell: cat /etc/sysctl.conf | grep -E "web tunning|Socket Tuning|membase tunning" | wc -l
+    register: kernel_check // lay result tra ve bien register
+	
+ansible -m ping all 
+ansible -m ping web-servers
+ansible -m command "ifconfig" all
+ansible -m shell -a "uptime" all
+ansible -m service -a "name=sshd state=restarted"
+
+  - name: sshd configuration file update
+    template: src={{ roles_path }}/{{ products }}/templates/sshd_config.j2 
+     dest=/etc/ssh/sshd_config
+     backup=yes
+     owner=0 group=0 mode=0644
+     validate='/usr/sbin/sshd -T -f %s' // xác nhận đúng syntax
+    notify:
+    - restart sshd
+	
+#### HAPROXY MYSQL 
+I have seen two causes for this error in your setup.
+
+Please comment out the "bind-address" statment in your my.cnf configs for your mariadb servers and restart them (one at a time, wait for them to rejoin the cluster)
+
+In HAproxy, you need to use a special options to allow haproxy to mark the server as up. A standard tcpchk will not work for an extended period of time for a number of reasons.
+
+a. Create an "haproxy" user in your database, no password. You can lock down its permissions later.
+
+b. Add "option mysql-check user haproxy" to your haproxy.cfg under your Maria/Galera section
+
+c. Restart Haproxy
+
+That should solve your issue. A quick telnet to your virtual ip address should show you that it is working.
+####
+F39SuTAN
+
+wallet  cnFBLE7h
+
+couchbase : FDjTRdQK
+
+You have successfully installed Couchbase Server.
+Please browse to http://SDKDB-001:8091/ to configure your server.
+Please refer to http://couchbase.com for additional resources.
+
+Please note that you have to update your firewall configuration to
+allow connections to the following ports: 11211, 11210, 11209, 4369,
+8091, 8092, 8093, 9100 to 9105, 9998, 18091, 18092, 11214, 11215 and
+from 21100 to 21299.
+
+By using this software you agree to the End User License Agreement.
+See /opt/couchbase/LICENSE.txt.
+
+
+
+disable root chinh thanh 0
+/etc/init.d/cloudinit rétart
+vi /root/.ssh/authorize 
+xóa đoạn đầu  đến ssh-rsa
+thử đi ^^
+
+###xargs do result tu command truoc thanh hang ngang
+
+http://regexr.com/
