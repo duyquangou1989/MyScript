@@ -6,11 +6,13 @@ sacli_excute = "/usr/local/openvpn_as/scripts/sacli"
 
 def data_to_dict(filepath):
 	data_final = {}
-	f = open(filepath,"r")
-	for line in f:
-		line = line.strip().split(" ")
-		#print line.split(" ")
-		data_final[line[0]] = line[1]
+	try:
+		f = open(filepath,"r")
+		for line in f:
+                	line = line.strip().split(" ")
+                	data_final[line[0]] = line[1]
+	except IOError:
+		print ('File Error')
 	return data_final
 
 def check_account_exist(account):

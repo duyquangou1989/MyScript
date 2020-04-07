@@ -1,7 +1,1 @@
-nga.nguyenthi 10.74.82.87
-nguyen.bui 10.74.82.88
-salesadminhn1 10.74.83.84
-salesadminhcm1 10.74.83.85
-mai.le 10.74.83.87
-ga.thaikien 10.74.83.88
-ap.thaikienhcm 10.74.83.89
+phuong.truong 10.74.84.84
